@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Add {{ category | title }} — Admin{% endblock %}
+
+{% block content %}
+<div class="form-container" style="margin-top: 120px;">
+    <h2 class="form-title">Add {{ category | title }}</h2>
+
+    {% if error %}
+    <div class="form-error visible" role="alert">
+        {{ error | e }}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/admin/add/{{ category }}" enctype="multipart/form-data" novalidate>
+        {# SECURITY: CSRF Token #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" name="title" required
+                   maxlength="200"
+                   placeholder="Enter a descriptive title"
+                   pattern="[A-Za-z0-9\s\-_\.]{3,200}">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" name="description" required
+                      maxlength="2000"
+                      placeholder="Describe this item in detail..."
+                      minlength="10"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image *</label>
+            <input type="file" id="image" name="image" required
+                   accept="image/jpeg,image/png,image/webp,image/gif"
+                   onchange="validateFile(this)">
+            <small style="color: var(--text-muted); font-size: 12px; display: block; margin-top: 6px;">
+                Accepted: JPG, PNG, WebP, GIF. Max size: 5MB.
+            </small>
+        </div>
+
+        {# SECURITY: Honeypot field #}
+        <div class="form-honeypot" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="submit" class="btn btn-primary" style="flex:1;">
+                Upload
+            </button>
+            <a href="/admin" class="btn btn-secondary" style="flex:1; justify-content: center;">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<script nonce="{{ csp_nonce }}">
+function validateFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+    if (file.size > maxSize) {
+        alert('File is too large. Maximum size is 5MB.');
+        input.value = '';
+        return;
+    }
+
+    if (!allowedTypes.includes(file.type)) {
+        alert('Invalid file type. Only JPG, PNG, WebP, and GIF are allowed.');
+        input.value = '';
+        return;
+    }
+}
+</script>
+{% endblock %}

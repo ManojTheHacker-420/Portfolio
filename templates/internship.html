@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Internship Experience — Manoj Portfolio{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 100px;">
+    <h2 class="section-title">💼 Internship Experience</h2>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Explore my past internships, roles, and contributions throughout my career journey.
+    </p>
+
+    <div class="grid" style="max-width: 1000px;">
+        <!-- ShadowFox -->
+        <article class="internship-card reveal">
+            <h3>ShadowFox</h3>
+            <div class="internship-meta">
+                <span class="role">🛡️ Virtual Cybersecurity Intern</span>
+                <span>📅 Jun 2025 – Jul 2025</span>
+            </div>
+            <p class="internship-desc">
+                Successfully demonstrated and practiced three cybersecurity attack techniques during my 30-day internship program. Gained hands-on experience in penetration testing methodologies and vulnerability assessment.
+            </p>
+            <div class="card-actions">
+                <a href="{{ url_for('static', filename='uploads/ShadowFox.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    View Certificate
+                </a>
+            </div>
+        </article>
+
+        <!-- Terv Pro -->
+        <article class="internship-card reveal">
+            <h3>Terv Pro</h3>
+            <div class="internship-meta">
+                <span class="role">👨‍🏫 Technical Trainer</span>
+                <span>📅 Apr 2025 – Oct 2025</span>
+            </div>
+            <p class="internship-desc">
+                Acted as a Technical Trainer, delivering clear and effective instruction to students on technical concepts. Developed training materials and mentored learners in various technology domains.
+            </p>
+            <div class="card-actions">
+                <a href="{{ url_for('static', filename='uploads/TFTPL_Internship_certificate_Manoj_M.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    View Certificate
+                </a>
+            </div>
+        </article>
+
+        <!-- Desicrew -->
+        <article class="internship-card reveal">
+            <h3>Desicrew</h3>
+            <div class="internship-meta">
+                <span class="role">🔧 Technical IT Support</span>
+                <span>📅 Jan 2026 – Jul 2026</span>
+            </div>
+            <p class="internship-desc">
+                Acted as a Technical IT Support specialist, providing timely and effective assistance to users on technical issues. Troubleshot hardware and software problems and maintained system documentation.
+            </p>
+            <div class="card-actions">
+                <a href="{{ url_for('static', filename='uploads/TFTPL_Internship_certificate_Manoj_M.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    View Certificate
+                </a>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

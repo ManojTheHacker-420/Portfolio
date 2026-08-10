@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard — Manage Content{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 100px;">
+    <div class="admin-header">
+        <div>
+            <h2 style="color: var(--accent); font-size: 28px; margin-bottom: 4px;">📊 Admin Dashboard</h2>
+            <p style="color: var(--text-secondary); font-size: 14px;">Manage all uploaded content securely</p>
+        </div>
+        <div class="admin-actions">
+            <a href="/admin/add/project" class="btn btn-primary btn-sm">+ Add Project</a>
+            <a href="/admin/add/achievement" class="btn btn-primary btn-sm">+ Add Achievement</a>
+            <a href="/admin/add/certificate" class="btn btn-primary btn-sm">+ Add Certificate</a>
+            <a href="/admin/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </div>
+
+    {% if items %}
+    <div class="admin-grid">
+        {% for p in items %}
+        <article class="admin-card reveal">
+            <img src="{{ url_for('static', filename='uploads/' + p.image) }}" alt="{{ p.title | e }}" loading="lazy">
+            <div class="admin-card-body">
+                <h3>{{ p.title | e }}</h3>
+                <p>{{ p.description | e | truncate(80) }}</p>
+                <span class="category-tag">{{ p.category | e | upper }}</span>
+
+                {# SECURITY: DELETE uses POST with CSRF, not GET #}
+                <form method="POST" action="/admin/delete/{{ p.id }}" class="delete-form"
+                      onsubmit="return confirm('Are you sure you want to delete this item? This action cannot be undone.');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <button type="submit" class="btn btn-danger btn-sm" style="width:100%;">
+                        🗑️ Remove
+                    </button>
+                </form>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+        <p style="font-size: 48px; margin-bottom: 16px;">📭</p>
+        <p>No items found. Start by adding your first project, achievement, or certificate!</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

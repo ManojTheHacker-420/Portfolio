@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {# SECURITY: Content Security Policy - Strict #}
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ csp_nonce }}'; style-src 'self' 'nonce-{{ csp_nonce }}' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+
+    {# SECURITY: Prevent MIME sniffing #}
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    {# SECURITY: Referrer policy #}
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    {# SECURITY: Theme color for mobile browsers #}
+    <meta name="theme-color" content="#0a0a0f" id="theme-color-meta">
+
+    {# CSP nonce for dynamic scripts/styles #}
+    <meta name="csp-nonce" content="{{ csp_nonce }}">
+
+    <title>{% block title %}Manoj Portfolio{% endblock %}</title>
+
+    {# Google Fonts - loaded securely #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    {# Main stylesheet with nonce #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" nonce="{{ csp_nonce }}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {# Loader #}
+    <div id="site-loader" role="status" aria-live="polite" aria-label="Loading portfolio">
+        <div class="loader-wrap">
+            <div class="logo-mark">MP</div>
+            <div>
+                <div class="loader-text">Loading portfolio</div>
+                <div class="loader-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    {# Navbar #}
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="/" class="logo" aria-label="Home">
+                    <div class="logo-avatar">
+                        <img src="{{ url_for('static', filename='uploads/Manoj M.png') }}" alt="Manoj profile" loading="eager">
+                    </div>
+                    <div class="logo-text">Manoj <span>Portfolio</span></div>
+                </a>
+            </div>
+
+            <div class="nav-center">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="/#projects-section" class="nav-link">Projects</a></li>
+                    <li><a href="/#achievements-section" class="nav-link">Achievements</a></li>
+                    <li><a href="/#certificates-section" class="nav-link">Certificates</a></li>
+                    <li><a href="/internship" class="nav-link">Internships</a></li>
+                    <li><a href="/contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    {# Mobile Navigation #}
+    <nav class="mobile-nav" id="mobileNav" aria-hidden="true" aria-label="Mobile navigation">
+        <ul>
+            <li><a href="/#projects-section">Projects</a></li>
+            <li><a href="/#achievements-section">Achievements</a></li>
+            <li><a href="/#certificates-section">Certificates</a></li>
+            <li><a href="/internship">Internships</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    {# Main Content #}
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {# Footer #}
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; {{ current_year }} Manoj — All Rights Reserved</p>
+            <div class="footer-links">
+                <a href="/contact" class="footer-link">Contact</a>
+                <span class="footer-divider">|</span>
+                <a href="/findme" class="footer-link">Find Me</a>
+            </div>
+        </div>
+    </footer>
+
+    {# Back to top button #}
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    {# Main JS with nonce #}
+    <script src="{{ url_for('static', filename='js/main.js') }}" nonce="{{ csp_nonce }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
