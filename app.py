@@ -637,8 +637,10 @@ def create_app(config_class=Config):
 
 # ==================== MAIN ====================
 
+# Create app at module level so Gunicorn can find it
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     # In production, use a WSGI server like Gunicorn
     # NEVER run debug=True in production
     print("=" * 60)
